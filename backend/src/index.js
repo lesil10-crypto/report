@@ -15,20 +15,16 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// CORS 설정 (가장 먼저!)
+app.use(cors());
+
 // 미들웨어
 app.use(helmet({
-  crossOriginResourcePolicy: { policy: "cross-origin" }
+  crossOriginResourcePolicy: false,
+  crossOriginOpenerPolicy: false,
+  crossOriginEmbedderPolicy: false
 }));
 app.use(compression());
-
-// CORS 설정
-const corsOptions = {
-  origin: '*',
-  credentials: false,
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-};
-app.use(cors(corsOptions));
 
 app.use(express.json({ limit: '10mb' }));
 
