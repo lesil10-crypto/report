@@ -18,7 +18,7 @@ if (process.env.GOOGLE_AI_API_KEY) {
 }
 
 const provider = process.env.TEXT_PROVIDER || 'google';
-const model = process.env.TEXT_MODEL || 'gemini-3-pro-preview';
+const model = process.env.TEXT_MODEL || 'gemini-3-flash';
 
 /**
  * 프롬프트를 실행하여 텍스트를 생성합니다.
@@ -90,7 +90,7 @@ async function generateWithAnthropic(systemPrompt, userPrompt, jsonMode) {
 async function generateWithGoogle(systemPrompt, userPrompt, jsonMode) {
   if (!genAI) throw new Error('Google AI API 키가 설정되지 않았습니다.');
   
-  const geminiModel = genAI.getGenerativeModel({ model: model || 'gemini-3-pro-preview' });
+  const geminiModel = genAI.getGenerativeModel({ model: model || 'gemini-3-flash' });
   
   const fullPrompt = jsonMode
     ? `${systemPrompt}\n\n${userPrompt}\n\n반드시 유효한 JSON 형식으로만 응답하세요.`
