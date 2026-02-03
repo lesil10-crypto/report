@@ -1,0 +1,301 @@
+/* WordCard.css */
+
+.word-card {
+  padding: var(--spacing-xl);
+}
+
+.word-card-header {
+  display: flex;
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.word-main-info {
+  flex: 1;
+}
+
+.word-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.word-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.speak-btn {
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-full);
+}
+
+.speak-btn:hover {
+  background: var(--color-accent-light);
+  color: var(--color-accent-primary);
+}
+
+.word-pronunciation {
+  font-size: 1.2rem;
+  color: var(--color-text-muted);
+  margin: var(--spacing-sm) 0;
+  font-family: 'Times New Roman', serif;
+}
+
+.word-pos {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.pos-tag {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--color-accent-light);
+  color: var(--color-accent-primary);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* 단어 이미지 */
+.word-image-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-md);
+}
+
+.word-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.word-image-container:hover .word-image {
+  transform: scale(1.05);
+}
+
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  color: white;
+  font-size: 0.9rem;
+}
+
+.word-image-container:hover .image-overlay {
+  opacity: 1;
+}
+
+/* 의미 섹션 */
+.meanings-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid var(--color-bg-secondary);
+}
+
+.section-title .icon {
+  font-size: 1.2rem;
+}
+
+.meanings-list {
+  list-style: none;
+}
+
+.meaning-item {
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--color-bg-secondary);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--spacing-sm);
+}
+
+.meaning-item:last-child {
+  border-bottom: none;
+}
+
+.meaning-pos {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-secondary);
+  padding: 2px 8px;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.meaning-text {
+  font-size: 1.1rem;
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.meaning-usage {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.meaning-example {
+  width: 100%;
+  margin-top: var(--spacing-sm);
+  padding-left: var(--spacing-md);
+  border-left: 3px solid var(--color-accent-light);
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.example-translation {
+  display: block;
+  color: var(--color-text-muted);
+  font-style: normal;
+  margin-top: var(--spacing-xs);
+  font-size: 0.9rem;
+}
+
+/* 숙어 */
+.idioms-list {
+  list-style: none;
+}
+
+.idiom-item {
+  padding: var(--spacing-md);
+  background: var(--color-bg-elevated);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-sm);
+}
+
+.idiom-phrase {
+  font-weight: 600;
+  color: var(--color-accent-primary);
+  margin-right: var(--spacing-sm);
+}
+
+.idiom-meaning {
+  color: var(--color-text-secondary);
+}
+
+.idiom-example {
+  margin-top: var(--spacing-sm);
+  color: var(--color-text-muted);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* 유의어/반의어 */
+.word-relations {
+  display: flex;
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  flex-wrap: wrap;
+}
+
+.relation-group {
+  flex: 1;
+  min-width: 200px;
+}
+
+.relation-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.relation-words {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.relation-word {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-full);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.relation-word.synonym {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.relation-word.synonym:hover {
+  background: #bbdefb;
+}
+
+.relation-word.antonym {
+  background: #fce4ec;
+  color: #c2185b;
+}
+
+.relation-word.antonym:hover {
+  background: #f8bbd9;
+}
+
+.word-korean {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+/* 액션 버튼 */
+.word-card-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-bg-secondary);
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .word-card-header {
+    flex-direction: column-reverse;
+  }
+  
+  .word-image-container {
+    width: 100%;
+    height: 250px;
+  }
+  
+  .word-title {
+    font-size: 2rem;
+  }
+  
+  .word-relations {
+    flex-direction: column;
+  }
+  
+  .word-card-actions {
+    flex-direction: column;
+  }
+  
+  .word-card-actions .btn {
+    width: 100%;
+  }
+}
