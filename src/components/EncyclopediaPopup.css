@@ -1,0 +1,259 @@
+/* EncyclopediaPopup.css */
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--spacing-lg);
+}
+
+.popup-content {
+  background: var(--color-bg-card);
+  border-radius: var(--border-radius-xl);
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-xl);
+  animation: popup-in 0.3s ease;
+}
+
+@keyframes popup-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-bottom: 1px solid var(--color-bg-secondary);
+}
+
+.popup-header h2 {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.popup-close {
+  background: none;
+  border: none;
+  padding: var(--spacing-sm);
+  cursor: pointer;
+  color: var(--color-text-muted);
+  border-radius: var(--border-radius-full);
+  transition: all var(--transition-fast);
+}
+
+.popup-close:hover {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+}
+
+.popup-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-xl);
+}
+
+/* 백과사전 섹션 */
+.encyclopedia-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.encyclopedia-section h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-accent-primary);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid var(--color-accent-light);
+}
+
+.section-icon {
+  font-size: 1.2rem;
+}
+
+.section-content {
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+
+.section-content p {
+  margin-bottom: var(--spacing-md);
+}
+
+/* 어원 */
+.etymology-origin {
+  font-size: 1.05rem;
+}
+
+.etymology-language {
+  color: var(--color-text-muted);
+}
+
+.etymology-roots {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  margin-top: var(--spacing-md);
+}
+
+.root-word {
+  background: var(--color-accent-light);
+  color: var(--color-accent-primary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+}
+
+/* 역사적 예시 */
+.historical-examples {
+  margin-top: var(--spacing-lg);
+}
+
+.historical-example {
+  background: var(--color-bg-elevated);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-md);
+  border-left: 4px solid var(--color-accent-primary);
+}
+
+.example-period {
+  display: inline-block;
+  background: var(--color-accent-primary);
+  color: white;
+  padding: 2px 8px;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: var(--spacing-sm);
+}
+
+.example-event {
+  margin: var(--spacing-sm) 0 !important;
+  font-weight: 500;
+}
+
+.example-significance {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+/* 문학 인용 */
+.literary-examples {
+  margin-top: var(--spacing-lg);
+}
+
+.literary-quote {
+  background: linear-gradient(135deg, #f5f5f5 0%, #ececec 100%);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-md);
+  position: relative;
+}
+
+.literary-quote::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-size: 4rem;
+  color: var(--color-accent-light);
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+.quote-text {
+  font-style: italic;
+  font-size: 1.1rem;
+  padding-left: var(--spacing-lg);
+}
+
+.literary-quote footer {
+  margin-top: var(--spacing-md);
+  text-align: right;
+  color: var(--color-text-muted);
+}
+
+.work-title {
+  font-style: italic;
+  margin-left: var(--spacing-xs);
+}
+
+.quote-analysis {
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px dashed var(--color-bg-secondary);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+/* 흥미로운 사실 */
+.interesting-facts {
+  list-style: none;
+}
+
+.interesting-facts li {
+  position: relative;
+  padding-left: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-secondary);
+}
+
+.interesting-facts li::before {
+  content: '✨';
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* 로딩 상태 */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl);
+  color: var(--color-text-muted);
+}
+
+.loading-spinner {
+  animation: spin 1s linear infinite;
+  color: var(--color-accent-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+/* 반응형 */
+@media (max-width: 600px) {
+  .popup-content {
+    max-height: 95vh;
+    border-radius: var(--border-radius-lg);
+  }
+  
+  .popup-body {
+    padding: var(--spacing-md);
+  }
+}
