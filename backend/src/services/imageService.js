@@ -8,7 +8,7 @@ if (process.env.OPENAI_API_KEY) {
   openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 }
 
-const provider = process.env.IMAGE_PROVIDER || 'pollinations';
+const provider = process.env.IMAGE_PROVIDER || 'cloudflare';
 
 /**
  * 이미지 생성 메인 함수
@@ -18,6 +18,8 @@ export async function generateImage(prompt, options = {}) {
   
   try {
     switch (provider) {
+      case 'cloudflare':
+        return await generateWithCloudflare(prompt);
       case 'pollinations':
         return await generateWithPollinations(prompt, size);
       case 'dalle':
@@ -27,8 +29,7 @@ export async function generateImage(prompt, options = {}) {
       case 'leonardo':
         return await generateWithLeonardo(prompt, size);
       default:
-        // 기본값으로 Pollinations 사용
-        return await generateWithPollinations(prompt, size);
+        return await generateWithCloudflare(prompt);
     }
   } catch (error) {
     console.error('이미지 생성 오류:', error);
@@ -43,6 +44,38 @@ export async function generateImage(prompt, options = {}) {
     
     throw error;
   }
+}
+
+/**
+ * Cloudflare Workers AI 이미지 생성
+ */
+async function generateWithCloudflare(prompt) {
+  const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
+  const apiToken = process.env.CLOUDFLARE_API_TOKEN;
+  
+  if (!accountId || !apiToken) {
+    throw new Error('Cloudflare API 설정이 필요합니다.');
+  }
+  
+  const response = await axios.post(
+    `https://api.cloudflare.com/client/v4/accounts/${accountId}/ai/run/@cf/stabilityai/stable-diffusion-xl-base-1.0`,
+    { prompt },
+    {
+      headers: {
+        'Authorization': `Bearer ${apiToken}`,
+        'Content-Type': 'application/json'
+      },
+      responseType: 'arraybuffer'
+    }
+  );
+  
+  // 이미지를 Base64로 변환
+  const base64 = Buffer.from(response.data).toString('base64');
+  
+  return {
+    base64: `data:image/png;base64,${base64}`,
+    provider: 'cloudflare'
+  };
 }
 
 /**
