@@ -1,8 +1,8 @@
 import React from 'react';
-import { X, Download } from 'lucide-react';
+import { X, Download, Info } from 'lucide-react';
 import './ImagePopup.css';
 
-function ImagePopup({ image, onClose }) {
+function ImagePopup({ image, word, onClose }) {
   if (!image) return null;
   
   const imageUrl = image.url || image.base64;
@@ -14,7 +14,7 @@ function ImagePopup({ image, onClose }) {
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `vocabulary-image-${Date.now()}.png`;
+      a.download = `${word || 'vocabulary'}-image-${Date.now()}.png`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -28,24 +28,28 @@ function ImagePopup({ image, onClose }) {
     <div className="image-popup-overlay" onClick={onClose}>
       <div className="image-popup-content" onClick={e => e.stopPropagation()}>
         <div className="image-popup-header">
-          <button className="btn btn-sm" onClick={handleDownload}>
-            <Download size={16} />
-            다운로드
-          </button>
-          <button className="popup-close" onClick={onClose}>
-            <X size={24} />
-          </button>
+          {word && <h3 className="popup-word-title">{word}</h3>}
+          <div className="popup-header-buttons">
+            <button className="btn btn-sm" onClick={handleDownload}>
+              <Download size={16} />
+              다운로드
+            </button>
+            <button className="popup-close" onClick={onClose}>
+              <X size={24} />
+            </button>
+          </div>
         </div>
         
         <div className="image-popup-body">
-          <img src={imageUrl} alt="Word illustration" />
+          <img src={imageUrl} alt={word || 'Word illustration'} />
         </div>
         
         {image.revisedPrompt && (
           <div className="image-popup-footer">
-            <p className="revised-prompt">
-              <strong>이미지 설명:</strong> {image.revisedPrompt}
-            </p>
+            <div className="image-description">
+              <Info size={18} className="info-icon" />
+              <p>{image.revisedPrompt}</p>
+            </div>
           </div>
         )}
       </div>
