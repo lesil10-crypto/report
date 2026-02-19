@@ -220,24 +220,31 @@ async function generateWithLeonardo(prompt, size) {
  * 단어 핵심 이미지 생성
  */
 export async function generateWordImage(word, meaning, isComplex = false) {
+  // word는 영어 단어 (예: dinosaur)
+  // meaning은 한국어 의미 (예: 공룡)
+  
   let prompt;
+  let imageDescription;
   
   if (isComplex) {
-    // 복잡한 개념 (예: 뇌, 원자 등)은 다이어그램 스타일
-    prompt = `Educational diagram illustration of "${word}" (${meaning}). 
-Clean, detailed scientific diagram style with labeled parts. 
-Professional educational material aesthetic. 
-High quality, clear visualization with annotations in English.
-White or light gray background.`;
+    // 복잡한 개념 (예: brain, atom 등)은 다이어그램 스타일
+    prompt = `Scientific diagram of ${word}, educational illustration, detailed anatomy, labeled parts, clean white background, professional textbook style`;
+    imageDescription = `'${word}'(${meaning})의 과학적 다이어그램입니다. 교육용으로 제작된 이 이미지는 ${meaning}의 구조와 특징을 상세하게 보여줍니다.`;
   } else {
-    prompt = `Beautiful, clear illustration representing the concept of "${word}" (${meaning}).
-Modern, clean artistic style. 
-Visually intuitive representation of the meaning.
-High quality, vibrant colors.
-Suitable for educational vocabulary learning.`;
+    // 일반 단어는 직접적인 사실적 이미지
+    prompt = `A realistic photo of ${word}, high quality, clear image, centered, simple clean background, no text`;
+    imageDescription = `'${word}'(${meaning})의 이미지입니다. 이 단어는 '${meaning}'을(를) 의미하며, 영어 학습에서 시각적으로 기억하기 좋은 대표적인 이미지입니다.`;
   }
   
-  return await generateImage(prompt, { size: '1024x1024', style: 'vivid' });
+  console.log('이미지 생성 프롬프트:', prompt);
+  
+  const result = await generateImage(prompt, { size: '1024x1024', style: 'vivid' });
+  
+  // 이미지 설명 추가
+  return {
+    ...result,
+    revisedPrompt: imageDescription
+  };
 }
 
 /**
